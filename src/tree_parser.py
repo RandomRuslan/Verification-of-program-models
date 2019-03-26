@@ -281,8 +281,7 @@ def p_slice(p):
     for i, index in enumerate(p[3]):
         indexes.append(IndexOrParameter(exprs=index, index=i, pos=set_pos(p, 1), children=p[3]))
     expr = NodeValue('expr', children=[p[1]])
-    slice = NodeValue('slice', children=[indexes])
-    p[0] = Slice(expr=p[3], indexes=indexes, pos=set_pos(p, 2), children=[expr, slice])
+    p[0] = Slice(expr=p[1], indexes=indexes, pos=set_pos(p, 2), children=[expr, *p[3]])
 
 
 def p_ranges(p):

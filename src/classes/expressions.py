@@ -59,4 +59,4 @@ class Slice(NodeValue):
         self.indexes = indexes
 
     def __repr__(self):
-        return self.expr + '[' + str(self.indexes) + ']'
+        return str(self.expr) + '[' + str(self.indexes[0])+'..' + str(self.indexes[1]) + ']'
