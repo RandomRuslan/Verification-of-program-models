@@ -278,10 +278,11 @@ def p_call(p):
 def p_slice(p):
     """slice : expr LBRACKET ranges RBRACKET"""
     indexes = []
-    for i, index in enumerate(p[3]):
+    ind = p[3] if type(p[3]) == list else [p[3]]
+    for i, index in enumerate(ind):
         indexes.append(IndexOrParameter(exprs=index, index=i, pos=set_pos(p, 1), children=p[3]))
     expr = NodeValue('expr', children=[p[1]])
-    p[0] = Slice(expr=p[1], indexes=indexes, pos=set_pos(p, 2), children=[expr, *p[3]])
+    p[0] = Slice(expr=p[1], indexes=indexes, pos=set_pos(p, 2), children=[expr, *ind])
 
 
 def p_ranges(p):
